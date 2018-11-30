@@ -712,7 +712,8 @@ namespace OfficeTools
         /// <param name="e"></param>
         private void AddCurrentNode_button_Click(object sender, EventArgs e)
         {
-            AddtShortcutKey(true);
+            string NewId = AddtShortcutKey(true);
+            CurrentNode_dataGridView.SetSelectedRowByValue("ShortCutKeyID", NewId);//选中刚添加的那一行
         }
 
         /// <summary>删除按钮被单击
@@ -723,9 +724,13 @@ namespace OfficeTools
         private void DeleteCurrentNode_button_Click(object sender, EventArgs e)
         {
             String StrID = CurrentNode_dataGridView.GetSelectedRowValue("ShortCutKeyID");
+            
             if (string.IsNullOrEmpty(StrID)) return;
+            int IntSelectedRow = CurrentNode_dataGridView.SelectedRows[0].Index;
             tShortCutKey RemoveData = new tShortCutKey() { ShortCutKeyID = StrID };
             if (new ShortcutKeyManageService().DeleteShortCutKey(RemoveData)) InitKeyList();
+            CurrentNode_dataGridView.SetSelecetedRowByRowIndex(IntSelectedRow);
+
         }
 
         /// <summary> 表格中键盘按下[用于快捷键]
