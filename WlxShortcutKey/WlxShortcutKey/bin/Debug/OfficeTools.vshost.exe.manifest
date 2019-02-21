@@ -90,14 +90,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OfficeTools.exe" size="271872">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="OfficeTools.exe" size="272384">
       <assemblyIdentity name="OfficeTools" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>jZTTjIA2OfYoQyAAyym+7Uwtpbl4zzit9ERt3wNTvy0=</dsig:DigestValue>
+        <dsig:DigestValue>vF22M5u3v3WAB+OOzf1SnlOJO5x8zqva/dvuz87vgTk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -137,13 +137,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="OfficeTools.exe.config" size="2061">
+  <file name="OfficeTools.exe.config" size="2026">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>axMCnWnXAHJvSX8EhkO9uyOQjtDsF+tfegsACtP9y2s=</dsig:DigestValue>
+      <dsig:DigestValue>ovyHHhjtsKVROdOcuwzo5qRmFW/BIfVZ+68XJuHnNII=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
