@@ -33,3 +33,4 @@
 #### 如果你知道如何解决欢迎致电我的邮箱870856195@qq.com
 
 ## 开源程序如需转载请注明出处。
+[![ 996.icu ](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
