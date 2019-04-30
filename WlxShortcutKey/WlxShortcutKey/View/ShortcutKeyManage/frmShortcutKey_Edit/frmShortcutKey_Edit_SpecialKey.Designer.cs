@@ -38,9 +38,12 @@
             this.LeftTop_button = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.panel14 = new System.Windows.Forms.Panel();
             this.panel13 = new System.Windows.Forms.Panel();
             this.MouseWheelDown_button = new System.Windows.Forms.Button();
             this.MouseWheelTop_button = new System.Windows.Forms.Button();
+            this.MouseRight_button = new System.Windows.Forms.Button();
+            this.MouseLeft_button = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
             this.Right_button = new System.Windows.Forms.Button();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -59,6 +62,7 @@
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel14.SuspendLayout();
             this.panel13.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -158,28 +162,39 @@
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.panel13);
+            this.panel6.Controls.Add(this.panel14);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(104, 0);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(560, 393);
             this.panel6.TabIndex = 3;
             // 
+            // panel14
+            // 
+            this.panel14.Controls.Add(this.panel13);
+            this.panel14.Controls.Add(this.MouseRight_button);
+            this.panel14.Controls.Add(this.MouseLeft_button);
+            this.panel14.Location = new System.Drawing.Point(137, 52);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(243, 201);
+            this.panel14.TabIndex = 1;
+            // 
             // panel13
             // 
             this.panel13.Controls.Add(this.MouseWheelDown_button);
             this.panel13.Controls.Add(this.MouseWheelTop_button);
-            this.panel13.Location = new System.Drawing.Point(97, 46);
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel13.Location = new System.Drawing.Point(80, 0);
             this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(338, 199);
+            this.panel13.Size = new System.Drawing.Size(83, 201);
             this.panel13.TabIndex = 0;
             // 
             // MouseWheelDown_button
             // 
-            this.MouseWheelDown_button.Dock = System.Windows.Forms.DockStyle.Top;
+            this.MouseWheelDown_button.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MouseWheelDown_button.Location = new System.Drawing.Point(0, 107);
             this.MouseWheelDown_button.Name = "MouseWheelDown_button";
-            this.MouseWheelDown_button.Size = new System.Drawing.Size(338, 92);
+            this.MouseWheelDown_button.Size = new System.Drawing.Size(83, 94);
             this.MouseWheelDown_button.TabIndex = 3;
             this.MouseWheelDown_button.TabStop = false;
             this.MouseWheelDown_button.Text = "鼠标滚轮↓";
@@ -191,14 +206,41 @@
             // 
             this.MouseWheelTop_button.Dock = System.Windows.Forms.DockStyle.Top;
             this.MouseWheelTop_button.Location = new System.Drawing.Point(0, 0);
+            this.MouseWheelTop_button.Margin = new System.Windows.Forms.Padding(0);
             this.MouseWheelTop_button.Name = "MouseWheelTop_button";
-            this.MouseWheelTop_button.Size = new System.Drawing.Size(338, 107);
+            this.MouseWheelTop_button.Size = new System.Drawing.Size(83, 107);
             this.MouseWheelTop_button.TabIndex = 2;
             this.MouseWheelTop_button.TabStop = false;
             this.MouseWheelTop_button.Text = "鼠标滚轮↑";
             this.toolTip1.SetToolTip(this.MouseWheelTop_button, "鼠标指向屏幕右上角");
             this.MouseWheelTop_button.UseVisualStyleBackColor = true;
             this.MouseWheelTop_button.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // MouseRight_button
+            // 
+            this.MouseRight_button.Dock = System.Windows.Forms.DockStyle.Right;
+            this.MouseRight_button.Location = new System.Drawing.Point(163, 0);
+            this.MouseRight_button.Name = "MouseRight_button";
+            this.MouseRight_button.Size = new System.Drawing.Size(80, 201);
+            this.MouseRight_button.TabIndex = 4;
+            this.MouseRight_button.TabStop = false;
+            this.MouseRight_button.Text = "鼠标右键";
+            this.toolTip1.SetToolTip(this.MouseRight_button, "鼠标指向屏幕右上角");
+            this.MouseRight_button.UseVisualStyleBackColor = true;
+            this.MouseRight_button.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // MouseLeft_button
+            // 
+            this.MouseLeft_button.Dock = System.Windows.Forms.DockStyle.Left;
+            this.MouseLeft_button.Location = new System.Drawing.Point(0, 0);
+            this.MouseLeft_button.Name = "MouseLeft_button";
+            this.MouseLeft_button.Size = new System.Drawing.Size(80, 201);
+            this.MouseLeft_button.TabIndex = 3;
+            this.MouseLeft_button.TabStop = false;
+            this.MouseLeft_button.Text = "鼠标左键";
+            this.toolTip1.SetToolTip(this.MouseLeft_button, "鼠标指向屏幕右上角");
+            this.MouseLeft_button.UseVisualStyleBackColor = true;
+            this.MouseLeft_button.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel7
             // 
@@ -330,7 +372,6 @@
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel1);
             this.Name = "frmShortcutKey_Edit_SpecialKey";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmShortcutKey_Edit_SpecialKey";
             this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
@@ -338,6 +379,7 @@
             this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            this.panel14.ResumeLayout(false);
             this.panel13.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
@@ -375,5 +417,8 @@
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Button MouseWheelDown_button;
         private System.Windows.Forms.Button MouseWheelTop_button;
+        private System.Windows.Forms.Panel panel14;
+        private System.Windows.Forms.Button MouseRight_button;
+        private System.Windows.Forms.Button MouseLeft_button;
     }
 }

@@ -66,6 +66,12 @@ namespace OfficeTools.View.ShortcutKeyManage
                 case "MouseWheelDown_button":
                     _KeyNum = "WheelDown";
                     break;
+                case "MouseLeft_button":
+                    _KeyNum = "MouseLeft";
+                    break;
+                case "MouseRight_button":
+                    _KeyNum = "MouseRight";
+                    break;
             }
             this.DialogResult = DialogResult.OK;
 

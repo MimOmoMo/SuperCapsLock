@@ -486,7 +486,7 @@ namespace OfficeTools
             //将tShortCutKey转换成vShortCutKey
             CurrentNodetShortCutKey = tShortCutKeyTempList.Select(T1 => UniversalMethod.ClassToClass<tShortCutKey, vShortCutKey>(T1, new vShortCutKey())).ToList();
             CurrentNodetShortCutKey.ForEach(T1 => T1.OwningChidrenNode = OwningChidren(T1));//加入是否有下级节点     
-            keyLayoutShow.DataSource = CurrentNodetShortCutKey;
+            //keyLayoutShow.DataSource = CurrentNodetShortCutKey;
         }
 
         /// <summary> 检查某快捷键是否有子节点
@@ -575,8 +575,8 @@ namespace OfficeTools
             if (ControlButton.IsControlButton(param.vkCode))
             {
                 if (ControlButtonDown)
-                {
-                    tShortCutKeyDataSource = new ShortcutKeyManageService().GettShortCutKeyList(); //当前结束时获取最新记录
+                {                    
+                    tShortCutKeyDataSource = new ShortcutKeyManageService().GettShortCutKeyList(); //当前结束时获取最新记录;
                     ShowKey();//当前节点置入到根节点
                     ControlButtonDown = false;
                 }
@@ -647,10 +647,14 @@ namespace OfficeTools
                     }
                     break;
                 case 513://鼠标左键按下
+                    RunShortcutKeyContens("MouseLeft");//启动程序
+    
                     break;
                 case 514://鼠标左键弹起
                     break;
                 case 516://鼠标右键按下
+                    RunShortcutKeyContens("MouseRight");//启动程序
+           
                     break;
                 case 517://鼠标右键弹起
                     break;
@@ -675,9 +679,10 @@ namespace OfficeTools
                         }
                         WhellColingObj.WhellDown.StartCooling();//重新开始冷却
                     }
-                    handle = true;
+                  
                     break;
             }
+            handle = true;
 
 
         }
@@ -702,13 +707,14 @@ namespace OfficeTools
                 switch (CurrentEntity.ShortCutKeyType)
                 {
                     case 0://程序                        
-                    case 1://网址
+                    case 1://
+
 
                         List<string> FilePathList = CurrentEntity.ShortCutKeyPath.Split(' ').ToList();
                         Regex PathRegex = new Regex(@".*?(\.exe)");//获取程序路径
                         Regex ParamRegex = new Regex(@"(?<=.*?(\.exe) ).*");//获取参数
 
-                        string PathString=CurrentEntity.ShortCutKeyPath;//程序路径文本
+                        string PathString = CurrentEntity.ShortCutKeyPath;//程序路径文本
                         string ParamString = "";//参数文本
 
                         Match PathResultMatch = PathRegex.Match(PathString);

@@ -38,6 +38,10 @@ namespace OfficeTools.Public
             //if (string.IsNullOrEmpty(KeyNum)) return "";
             switch (KeyNum)
             {
+                case "MouseLeft":
+                    return "鼠标左键";
+                case "MouseRight":
+                    return "鼠标右键";
                 case "WheelUp":
                     return "鼠标向上滚动";
                 case "WheelDown":
