@@ -16,6 +16,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Threading;
 using OfficeTools.View.ShortcutKeyManage;
+using System.Text.RegularExpressions;
 
 namespace OfficeTools
 {
@@ -703,7 +704,22 @@ namespace OfficeTools
                 {
                     case 0://程序                        
                     case 1://网址
-                        UniversalMethod.RunProgram(CurrentEntity.ShortCutKeyPath);
+
+                        List<string> FilePathList = CurrentEntity.ShortCutKeyPath.Split(' ').ToList();
+                        Regex PathRegex = new Regex(@".*?(\.exe)");//获取程序路径
+                        Regex ParamRegex = new Regex(@"(?<=.*?(\.exe) ).*");//获取参数
+
+                        string PathString=CurrentEntity.ShortCutKeyPath;//程序路径文本
+                        string ParamString = "";//参数文本
+
+                        Match PathResultMatch = PathRegex.Match(PathString);
+                        if (PathResultMatch.Success)//尾缀为.exe才获取参数，没有的话就视为不带参数的文件夹直接打开
+                        {
+                            ParamString = ParamRegex.Match(PathString).Value;
+                            PathString = PathResultMatch.Value;
+                        }
+
+                        UniversalMethod.RunProgram(PathString, ParamString);//启动程序
                         break;
                     case 2://系统组合键
                         UniversalMethod.KeyBoardDown(GetSysShortcutKey(CurrentEntity.ShortCutKeyPath));

@@ -197,11 +197,11 @@ namespace OfficeTools.Public
         /// 这样启动的程序启动后会激活成活动窗体，Program的Start只能在后台启动。启动后还需要点击一下任务栏才能看到页面
         /// </summary>
         /// <param name="ProgramFile"></param>
-        public static void RunProgram(string ProgramFile)
+        public static void RunProgram(string ProgramFile,string ParamString="")
         {
 
             //Process.Start("explorer.exe ", ProgramFile);
-            Process.Start( ProgramFile);
+            Process.Start(ProgramFile, ParamString);
             //frmDelayShow frm = new frmDelayShow();
             //frm.ProgramFile = ProgramFile;
             //frm.Show();
