@@ -616,10 +616,10 @@ namespace OfficeTools
         {
 
             handle = false;
+            if (!ControlButton.IsAllPressDown) return;//是否按下了控制键
             switch (wParam)
             {
-                case 512://鼠标移动
-                    if (!ControlButton.IsAllPressDown) return;//是否按下了控制键
+                case 512://鼠标移动                    
                     string StrKeyNum = GetScreenKeyNum();//获取鼠标触发的屏幕键代码
                     if (string.IsNullOrEmpty(StrKeyNum)) //鼠标是否已经离开的屏幕的边角地区
                     {
@@ -658,8 +658,7 @@ namespace OfficeTools
                     break;
                 case 520://鼠标中键弹起
                     break;
-                case 522://鼠标滚轮滚动
-                    if (!ControlButton.IsAllPressDown) return;
+                case 522://鼠标滚轮滚动                    
                     if (0 < param.hWnd)   //向上滑动                                               
                     {
                         if (WhellColingObj.WhellUp.IsOver)//冷却完成
