@@ -507,9 +507,7 @@ namespace OfficeTools
         /// <param name="handle">是否拦截这个按钮</param> 
         private void KeyboardDown(KeyboardHookLib.HookStruct param, out bool handle)
         {
-            handle = false;
-            //this.Text = string.Format(@"vkCode:{0};flags{1}", param.vkCode.ToString(), param.flags.ToString());
-
+            handle = false;           
             #region 控制键弹起或按下
             if (param.flags == 128 || param.flags == 160)//是否弹起
             {
@@ -523,7 +521,7 @@ namespace OfficeTools
                         break;
                     case (int)Keys.CapsLock:
                         ControlButton.CapsLock = false;
-                        ControlButtonDown = true;
+                        ControlButtonDown = false;
                         break;
                 }
             }
@@ -539,6 +537,7 @@ namespace OfficeTools
                         break;
                     case (int)Keys.CapsLock:
                         ControlButton.CapsLock = true;
+                        ControlButtonDown = true;
                         break;
                 }
             }
@@ -546,11 +545,11 @@ namespace OfficeTools
             if (ControlButton.IsControlButton(param.vkCode))
             {
                 if (ControlButtonDown)
-                {                    
+                {
                     tShortCutKeyDataSource = new ShortcutKeyManageService().GettShortCutKeyList(); //当前结束时获取最新记录;
                     ShowKey();//当前节点置入到根节点
-                    ControlButtonDown = false;
                 }
+               
                 return;//是控制键就不用往下走了
             }
             #endregion 控制键弹起或按下
