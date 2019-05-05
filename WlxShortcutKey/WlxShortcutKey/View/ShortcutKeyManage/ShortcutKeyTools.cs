@@ -20,7 +20,7 @@ using System.Text.RegularExpressions;
 
 namespace OfficeTools
 {
-    public partial class frmShortcutKey_Show : Form
+    public  class ShortcutKeyTools
     {
 
         #region 内部类
@@ -307,25 +307,30 @@ namespace OfficeTools
         /// </summary>
         class DelayRun
         {
-            /// <summary> 实例化
-            /// 
+
+            /// <summary> 实例化         
             /// </summary>
-            /// <param name="ParamRunForm">最终启动程序的窗体,该窗体必须有InvokeDelayRun的公开方法来执行最终运行的代码[本类只用于延时，延时的时间到了则将启动代码交给UI线程来执行]</param>
+            /// <param name="ParamRunForm">最终启动程序的窗体[本类只用于延时，延时的时间到了则将启动代码交给UI线程来执行]</param>
+            /// <param name="RunFuncParam">用于启动指定键代码的方法 </param>
             /// <param name="ParamKeyNum">最终运行的快捷键代码</param>
             /// <param name="ParamDelayTime">延迟时间[单位:ms]</param>
-            public DelayRun(frmShortcutKey_Show ParamRunForm, string ParamKeyNum, int ParamDelayTime)
+            public DelayRun(Form ParamRunForm, Func<string,bool>RunFuncParam, string ParamKeyNum, int ParamDelayTime)
             {
                 InvokeForm = ParamRunForm;
                 KeyNum = ParamKeyNum;
                 DelayTime = ParamDelayTime;
-
-
+                RunFunc = RunFuncParam;
             }
 
             /// <summary> 运行程序时的UI窗体
             /// 如果延时的时间到了，线程会将启动程序的代码提交到UI线程的消息队列，由UI线程来执行最终的启动代码
             /// </summary>
-            private frmShortcutKey_Show InvokeForm = null;
+            private Form InvokeForm = null;
+
+            /// <summary>
+            /// 用于启动指定键代码的方法            
+            /// </summary>
+            private Func<string, bool> RunFunc = null;
 
             /// <summary> 延时时间ms
             /// 
@@ -391,9 +396,15 @@ namespace OfficeTools
                             }
                             if (RunTime < DateTime.Now)
                             {
-                                object[] ParameArray = new object[1];
-                                ParameArray[0] = KeyNum;
-                                InvokeForm.BeginInvoke(new Action<string>(InvokeForm.InvokeDelayRun), ParameArray);
+                                //object[] ParameArray = new object[1];
+                                //ParameArray[0] = KeyNum;                             
+                                //InvokeForm.BeginInvoke(new Action<string>(InvokeForm.InvokeDelayRun), ParameArray);
+                                InvokeForm.BeginInvoke(new Action(() =>
+                                {
+                                    if (this.IsRun) return;
+                                    if (RunFunc != null) RunFunc(KeyNum);                                    
+                                    IsRun = true;                                    
+                                }));
                                 DelayRunThread = null;
                                 return;
                             }
@@ -408,6 +419,7 @@ namespace OfficeTools
 
 
             }
+            private bool IsRun = false;
             #endregion 方法
 
         }
@@ -443,29 +455,16 @@ namespace OfficeTools
         #endregion 属性
 
         #region 启动、初始化
-        public frmShortcutKey_Show()
+        public ShortcutKeyTools(Form MainForm)
         {
-
-            InitializeComponent();
-            ShowForm = (Form)(this.Parent);
-            if (ShowForm == null) ShowForm = this;
-        }
-
-        private void ShortcutKey_Show_Load(object sender, EventArgs e)
-        {
-            LoadFormTimer.Enabled = true;
-        }
-
-        private void LoadFormTimer_Tick(object sender, EventArgs e)
-        {
-            LoadFormTimer.Enabled = false;
-            this.Visible = false;
+            ParentForm = MainForm;
+            if (ParentForm == null) ParentForm = MainForm;
             tShortCutKeyDataSource = new ShortcutKeyManageService().GettShortCutKeyList();
             ShowKey();
-
             HookObj = new DeviceHook();
             HookObj.KeyboardEvent = KeyboardDown;
             HookObj.MouseEvent = MouseEvent;
+
         }
         #endregion 启动、初始化
 
@@ -500,35 +499,7 @@ namespace OfficeTools
             if (ResultCount == 0) return false;
             else return true;
         }
-
-        private Form ShowForm = null;
-
-        /// <summary> 设置窗口的现实和隐藏
-        /// 设置窗口的现实和隐藏
-        /// </summary>
-        /// <returns>成功改变Visible的值返回True，否则返回False</returns>         
-        private bool SetFormVisible()
-        {
-            bool SourceVisible = ShowForm.Visible;
-            if (ControlButton.IsAllPressDown)
-            {
-                ShowForm.Visible = true;
-                ShowForm.TopMost = true;
-            }
-            else
-            {
-                ShowForm.Visible = false;
-            }
-            bool VisibleChange = SourceVisible != ShowForm.Visible;//是否有变化
-            if (VisibleChange && ShowForm.Visible)
-            //if (true)
-            {
-                ShowKey();//当前节点置入到根节点
-                tShortCutKeyDataSource = new ShortcutKeyManageService().GettShortCutKeyList(); //当前结束时获取最新记录
-            }
-            return VisibleChange;
-        }
-
+                       
         /// <summary> 全系统的：键盘按下事件
         /// 全系统的：键盘按下事件
         /// </summary>
@@ -594,16 +565,7 @@ namespace OfficeTools
         }
         private bool ControlButtonDown = false;
 
-        /// <summary>延时后启动程序的方法
-        /// 主要用来在UI线程执行启动代码，
-        /// </summary>
-        /// <param name="ParamKeyNum"></param>
-        public void InvokeDelayRun(string ParamKeyNum)
-        {
-            if (IsRun) return;
-            RunShortcutKeyContens(ParamKeyNum);//启动程序
-            IsRun = true;
-        }
+    
 
         /// <summary> 全系统的：鼠标动作捕捉
         /// 全系统的：鼠标动作捕捉
@@ -641,7 +603,7 @@ namespace OfficeTools
                     }
                     else
                     {
-                        if (DelayRunObj == null) DelayRunObj = new DelayRun(this, StrKeyNum, 100);
+                        if (DelayRunObj == null) DelayRunObj = new DelayRun(ParentForm, RunShortcutKeyContens, StrKeyNum, 100);
                         DelayRunObj.KeyNum = StrKeyNum;
                         DelayRunObj.ReSetRunTime();//如果触发了边则延时启动，看后面还会不会触发角
                     }
@@ -691,13 +653,8 @@ namespace OfficeTools
                 case 517://鼠标右键弹起
                 case 522://鼠标滚轮滚动   
                     handle = true;
-
                     break;
             }
-
-            
-
-
         }
 
         /// <summary> 运行当前节点的某个快捷键
@@ -809,17 +766,7 @@ namespace OfficeTools
         #endregion 方法
 
         #region 事件
-        /// <summary> 快捷键项目被单击
-        /// 快捷键项目被单击
-        /// </summary>
-        /// <param name="sender">被单击的自定义控件[以继承自IShortcutKeyItem_Box接口，横向和竖向都可以被强转为IShortcutKeyItem_Box]</param>
-        /// <param name="e"></param>         
-        private void keyLayoutShow_ItemClick(object sender, EventArgs e)
-        {
-            vShortCutKey EntityTemp = ((IShortcutKeyItem_Box)sender).DataEntity;
-            if (EntityTemp == null) return;
-            RunShortcutKeyContens(EntityTemp.ShortCutKey);
-        }
+     
 
         /// <summary> 窗口即将被关闭时卸载键盘钩子
         /// 窗口即将被关闭时卸载键盘钩子

@@ -219,6 +219,7 @@
             // MouseRight_button
             // 
             this.MouseRight_button.Dock = System.Windows.Forms.DockStyle.Right;
+            this.MouseRight_button.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.MouseRight_button.Location = new System.Drawing.Point(163, 0);
             this.MouseRight_button.Name = "MouseRight_button";
             this.MouseRight_button.Size = new System.Drawing.Size(80, 201);

@@ -109,7 +109,6 @@
     <Compile Include="View\Base\frmShowFormBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Base\IShortcutKeyItem_Box.cs" />
     <Compile Include="View\Base\OTDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -158,12 +157,6 @@
     <Compile Include="View\ShortcutKeyManage\frmShortcutKey_Edit\frmShortcutKey_Edit_SysKey.Designer.cs">
       <DependentUpon>frmShortcutKey_Edit_SysKey.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\ShortcutKeyManage\frmShortcutKey_Show.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\ShortcutKeyManage\frmShortcutKey_Show.Designer.cs">
-      <DependentUpon>frmShortcutKey_Show.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -180,27 +173,10 @@
       <DependentUpon>Image.resx</DependentUpon>
     </Compile>
     <Compile Include="Service\ShortcutKeyManage\ShortcutKeyManageService.cs" />
-    <Compile Include="View\Base\KeyLayoutShow.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\Base\KeyLayoutShow.Designer.cs">
-      <DependentUpon>KeyLayoutShow.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Base\OTTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="View\Base\ShortcutKeyItem_Box1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\Base\ShortcutKeyItem_Box1.Designer.cs">
-      <DependentUpon>ShortcutKeyItem_Box1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Base\ShortcutKeyItem_Box.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="View\Base\ShortcutKeyItem_Box.Designer.cs">
-      <DependentUpon>ShortcutKeyItem_Box.cs</DependentUpon>
-    </Compile>
+    <Compile Include="View\ShortcutKeyManage\ShortcutKeyTools.cs" />
     <EmbeddedResource Include="View\ShortcutKeyManage\frmDelayShow.resx">
       <DependentUpon>frmDelayShow.cs</DependentUpon>
     </EmbeddedResource>
@@ -222,9 +198,6 @@
     <EmbeddedResource Include="View\ShortcutKeyManage\frmShortcutKey_Edit\frmShortcutKey_Edit_SysKey.resx">
       <DependentUpon>frmShortcutKey_Edit_SysKey.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ShortcutKeyManage\frmShortcutKey_Show.resx">
-      <DependentUpon>frmShortcutKey_Show.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -234,15 +207,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Image.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Base\KeyLayoutShow.resx">
-      <DependentUpon>KeyLayoutShow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Base\ShortcutKeyItem_Box1.resx">
-      <DependentUpon>ShortcutKeyItem_Box1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Base\ShortcutKeyItem_Box.resx">
-      <DependentUpon>ShortcutKeyItem_Box.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

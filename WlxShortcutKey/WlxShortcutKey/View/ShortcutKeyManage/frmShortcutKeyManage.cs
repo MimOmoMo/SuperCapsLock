@@ -58,10 +58,9 @@ namespace OfficeTools
             this.Visible = false;
             InitKeyList();
 
-            frmShortcutKey_Show frm = new frmShortcutKey_Show();
+            ShortcutKeyTools frm = new ShortcutKeyTools(this);
             frm.ParentForm = this;
-            frm.Show();
-            frm.Visible = false;
+           
         }
 
         #region 方法
@@ -149,7 +148,7 @@ namespace OfficeTools
                 if (Rowitem.Cells["IsChidren"].Value.ToString() == "True")
                 {
                     DataGridViewCellStyle CellStyleTemp = Rowitem.DefaultCellStyle;
-                    CellStyleTemp.BackColor = ShortcutKeyItem_Box.ShortcutKeyItem_Box_StateColor.OwiningChidren.Enter;
+                    CellStyleTemp.BackColor = Color.Blue;
                     //CellStyleTemp.SelectionBackColor = ShortcutKeyItem_Box.ShortcutKeyItem_Box_StateColor.OwiningChidren.Click;
                 }
             }
