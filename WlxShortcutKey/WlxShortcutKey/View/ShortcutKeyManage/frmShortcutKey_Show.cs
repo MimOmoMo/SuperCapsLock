@@ -682,7 +682,20 @@ namespace OfficeTools
                   
                     break;
             }
-            handle = true;
+
+            //统一拦截鼠标操作
+            switch (wParam)
+            {              
+                case 513://鼠标左键按下                
+                case 516://鼠标右键按下
+                case 517://鼠标右键弹起
+                case 522://鼠标滚轮滚动   
+                    handle = true;
+
+                    break;
+            }
+
+            
 
 
         }
