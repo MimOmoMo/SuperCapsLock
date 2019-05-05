@@ -40,8 +40,7 @@ namespace OfficeTools
         {
 
             InitializeComponent();
-            BackMission_notifyIcon.Icon = this.Icon;//右下角图标改为当前窗口图标
-            Key_textBox.MouseWheel += new MouseEventHandler(Key_textBox_MouseWheel);//捕捉鼠标滚轮事件
+            BackMission_notifyIcon.Icon = this.Icon;//右下角图标改为当前窗口图标            
             CurrentNode_dataGridView.AutoGenerateColumns = false;//取消自动生成列
         }
 
@@ -280,101 +279,9 @@ namespace OfficeTools
         /// <param name="e"></param> 
         private void ShortcutKey_otTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            RefreshDataGridView();
-            Edit_panel.Visible = false;
-            TreeNode SelectNode = ShortcutKey_otTreeView.SelectedNode;
-            if (SelectNode == null) return;//没有选中任何记录就返回
-            EditShortCutKey = tShortCutKeyDataSource.Where(T1 => T1.ShortCutKeyID == SelectNode.Name).FirstOrDefault();
-            if (EditShortCutKey == null) return;
-            Edit_panel.Visible = true;
-
-
-
-
-            Name_textBox.Text = EditShortCutKey.ShortCutKeyName;//赋值快捷键名称
-            //赋值快捷键的按键名称
-            if (!string.IsNullOrEmpty(EditShortCutKey.ShortCutKey))
-                Key_textBox.Text = UniversalMethod.GetKeyName(EditShortCutKey.ShortCutKey);
-            else Key_textBox.Text = "";
-
-            Path_textBox.Text = EditShortCutKey.ShortCutKeyPath;//赋值快捷键的打开路径
-
-            #region 赋值打开类型
-            switch (EditShortCutKey.ShortCutKeyType)
-            {
-                case 0:
-                    File_radioButton.Checked = true;
-                    break;
-                case 1:
-                    Folder_radioButton.Checked = true;
-                    break;
-                case 2:
-                    Web_radioButton.Checked = true;
-                    break;
-            }
-            #endregion 赋值打开类型
-
-            Img_pictureBox.Image = EditShortCutKey.ShortCutKeyImg.ToImage();//赋值的图标
-
-            tShortCutKey ParentEntity = tShortCutKeyDataSource.Where(T1 => T1.ShortCutKeyID == EditShortCutKey.ParentID).FirstOrDefault();
-            Parent_textBox.Text = (ParentEntity ?? new tShortCutKey() { ShortCutKeyName = "根节点" }).ShortCutKeyName;//赋值父节点名称
-
+            RefreshDataGridView();         
         }
-
-        /// <summary> 鼠标滚轮转换为快捷键名称
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param> 
-        private void Key_textBox_MouseWheel(object sender, MouseEventArgs e)
-        {
-            this.Text = e.Delta.ToString();
-            if (e.Delta > 0)
-                EditShortCutKey.ShortCutKey = "WheelUp";
-            if (e.Delta < 0)
-                EditShortCutKey.ShortCutKey = "WheelDown";
-            Key_textBox.Text = UniversalMethod.GetKeyName(EditShortCutKey.ShortCutKey);
-        }
-
-        /// <summary> 将按下的按键转换为键盘上的按键名称
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param> 
-        private void Key_textBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            EditShortCutKey.ShortCutKey = e.KeyValue.ToString();
-            Key_textBox.Text = UniversalMethod.GetKeyName(EditShortCutKey.ShortCutKey);
-            e.Handled = true;
-        }
-
-        /// <summary> 键盘按下时，禁止输入东西
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param> 
-        private void Key_textBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        /// <summary> 保存按钮被按下
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param> 
-        private void Save_button_Click(object sender, EventArgs e)
-        {
-            if (EditShortCutKey == null) return;
-            EditShortCutKey.ShortCutKeyName = Name_textBox.Text;
-            EditShortCutKey.ShortCutKeyPath = Path_textBox.Text;
-            EditShortCutKey.ShortCutKeyImg = Img_pictureBox.Image.ToByteArray();
-
-            if (new ShortcutKeyManageService().UpdateShortcutKey(EditShortCutKey))
-            {
-                MessageBox.Show("保存成功");
-                InitKeyList();
-            }
-
-
-        }
-
+        
         /// <summary> 按下某键时发生，主要用于快捷键操作
         /// </summary>
         /// <param name="sender"></param>
@@ -415,101 +322,7 @@ namespace OfficeTools
             ShortcutKey_otTreeView_AfterSelect(null, null);//发生了改变就把名称同步到右边
             new ShortcutKeyManageService().UpdateShortcutKey(tShortCutKeyTemp);//并保存这个名称
         }
-
-        /// <summary> 选择父节点按钮被单击
-        /// [将TreeView的单击委托切换到选择父节点]
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param> 
-        private void SelectParent_button_Click(object sender, EventArgs e)
-        {
-            if (EditShortCutKey == null) return;
-            if (tShortCutKeyDataSource.Count() < 2) return;//至少要有两个以上的节点才能选择父节点
-
-            ShortcutKey_otTreeView.AfterSelect -= new TreeViewEventHandler(ShortcutKey_otTreeView_AfterSelect);
-            ShortcutKey_otTreeView.SelectedNode = null;
-            EnterSelectParentState(true);
-            ShortcutKey_otTreeView.AfterSelect += new TreeViewEventHandler(ShortcutKey_otTreeView_AfterSelect1);
-        }
-
-        /// <summary> 选择父节点
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param> 
-        private void ShortcutKey_otTreeView_AfterSelect1(object sender, TreeViewEventArgs e)
-        {
-            TreeNode CurrentNode = ShortcutKey_otTreeView.SelectedNode;
-            if (EditShortCutKey.ShortCutKeyID == CurrentNode.Name) return;//不能选择自己做父节点           
-            ShortcutKey_otTreeView.AfterSelect -= new TreeViewEventHandler(ShortcutKey_otTreeView_AfterSelect1);
-            EditShortCutKey.ParentID = CurrentNode.Name;
-            Parent_textBox.Text = CurrentNode.Text;
-            RefreshTreeView();
-            ShortcutKey_otTreeView.SelectedNode = ShortcutKey_otTreeView.Nodes.Find(EditShortCutKey.ShortCutKeyID, true).FirstOrDefault();
-
-            ShortcutKey_otTreeView.AfterSelect += new TreeViewEventHandler(ShortcutKey_otTreeView_AfterSelect);
-            EnterSelectParentState(false);
-        }
-
-        /// <summary> 进入选择父节点模式
-        /// 隐藏掉所有其他控件
-        /// </summary>
-        /// <param name="isEnter">是否进入，如果不进入则还原之前的样子</param> 
-        private void EnterSelectParentState(bool isEnter = false)
-        {
-            Edit_panel.Visible = !isEnter;
-            Opration_panel.Visible = !isEnter;
-        }
-
-
-        /// <summary> 点击选择路径按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param> 
-        private void SelectPath_button_Click(object sender, EventArgs e)
-        {
-            if (EditShortCutKey == null) return;
-            switch (EditShortCutKey.ShortCutKeyType)
-            {
-                case 0://文件/程序
-                    SelectFile.Filter = "所有文件|*.*";
-                    if (SelectFile.ShowDialog() == DialogResult.Cancel) return;
-                    Path_textBox.Text = SelectFile.FileName;
-
-                    break;
-                case 1://文件夹
-                    if (SelectFolder.ShowDialog() == DialogResult.Cancel) return;
-                    Path_textBox.Text = SelectFolder.SelectedPath;
-                    break;
-                case 2://网址                    
-                    break;
-            }
-
-        }
-
-        /// <summary> 选择路径类型单选框
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param> 
-        private void radioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (EditShortCutKey == null) return;
-            if (File_radioButton.Checked) EditShortCutKey.ShortCutKeyType = 0;
-            if (Folder_radioButton.Checked) EditShortCutKey.ShortCutKeyType = 1;
-            if (Web_radioButton.Checked) EditShortCutKey.ShortCutKeyType = 2;
-        }
-
-        /// <summary> 单击图标选择图标文件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param> 
-        private void Img_pictureBox_Click(object sender, EventArgs e)
-        {
-            SelectFile.Filter = "图片|*.jpg;*.png;*.gif;*.jpeg;*.bmp;*.ico";
-            if (SelectFile.ShowDialog() == DialogResult.Cancel) return;
-            string FilePath = SelectFile.FileName;
-            byte[] ByteArray = System.IO.File.ReadAllBytes(FilePath);
-            Img_pictureBox.Image = ByteArray.ToImage();
-        }
+        
 
         /// <summary> 拖入文件
         /// </summary>
