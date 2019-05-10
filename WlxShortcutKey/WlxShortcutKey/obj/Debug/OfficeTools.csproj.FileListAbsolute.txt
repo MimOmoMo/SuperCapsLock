@@ -214,12 +214,8 @@ C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKe
 C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKey\obj\Debug\OfficeTools.View.ShortcutKeyManage.frmShortcutKey_Edit_SelectNode.resources
 C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKey\obj\Debug\OfficeTools.View.ShortcutKeyManage.frmShortcutKey_Edit_SpecialKey.resources
 C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKey\obj\Debug\OfficeTools.View.ShortcutKeyManage.frmShortcutKey_Edit_SysKey.resources
-C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKey\obj\Debug\OfficeTools.frmShortcutKey_Show.resources
 C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKey\obj\Debug\OfficeTools.Properties.Resources.resources
 C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKey\obj\Debug\OfficeTools.Resource.Image.Image.resources
-C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKey\obj\Debug\OfficeTools.View.Base.KeyLayoutShow.resources
-C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKey\obj\Debug\OfficeTools.View.Base.ShortcutKeyItem_Box1.resources
-C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKey\obj\Debug\OfficeTools.View.Base.ShortcutKeyItem_Box.resources
 C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKey\obj\Debug\OfficeTools.csproj.GenerateResource.Cache
 C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKey\obj\Debug\OfficeTools.exe.manifest
 C:\Users\Administrator\Documents\GitHub\OfficeTools\WlxShortcutKey\WlxShortcutKey\obj\Debug\OfficeTools.application

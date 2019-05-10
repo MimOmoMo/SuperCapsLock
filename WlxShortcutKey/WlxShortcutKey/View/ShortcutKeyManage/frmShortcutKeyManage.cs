@@ -617,6 +617,7 @@ namespace OfficeTools
         /// <returns></returns> 
         protected override bool ProcessDialogKey(Keys keydata)
         {
+            ShortcutKey_otTreeView.Nodes[0].Expand();
             if (keydata == Keys.Tab)
             {
                 return false;

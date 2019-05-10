@@ -27,7 +27,8 @@ namespace OfficeTools
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmShortcutKeyManage));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ShortcutKey_otTreeView = new OfficeTools.View.Base.OTTreeView();
             this.ShortcutKey_imageList = new System.Windows.Forms.ImageList(this.components);
@@ -253,6 +254,7 @@ namespace OfficeTools
             this.BackMission_notifyIcon.BalloonTipText = "文本";
             this.BackMission_notifyIcon.BalloonTipTitle = "标题";
             this.BackMission_notifyIcon.ContextMenuStrip = this.RightKeyMission_contextMenuStrip;
+            this.BackMission_notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("BackMission_notifyIcon.Icon")));
             this.BackMission_notifyIcon.Text = "快捷键管理";
             this.BackMission_notifyIcon.Visible = true;
             this.BackMission_notifyIcon.DoubleClick += new System.EventHandler(this.BackMission_notifyIcon_DoubleClick);
@@ -322,8 +324,8 @@ namespace OfficeTools
             this.CurrentNode_dataGridView.AllowUserToAddRows = false;
             this.CurrentNode_dataGridView.AllowUserToDeleteRows = false;
             this.CurrentNode_dataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.CurrentNode_dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.CurrentNode_dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.CurrentNode_dataGridView.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.CurrentNode_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CurrentNode_dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -494,11 +496,12 @@ namespace OfficeTools
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "frmShortcutKeyManage";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "SuperCapsLock";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmShortcutKeyManage_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
