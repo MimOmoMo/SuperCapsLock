@@ -8,19 +8,19 @@
 
 ## 展示
 
-![](C:\Users\Administrator\Documents\GitHub\OfficeTools\img\截图.jpg)
+![](<https://raw.githubusercontent.com/a1174236686/OfficeTools/master/img/Temp.jpg>)
 
 
 
 #### 下面展示简单展示按住CapsLock后鼠标指向屏幕左上角打开记事本
 
-![](C:\Users\Administrator\Documents\GitHub\OfficeTools\img\展示边快捷键.gif)
+![](<https://raw.githubusercontent.com/a1174236686/OfficeTools/master/img/OpenNotePad.gif>)
 
 #### 演示了我自己平时的一些基本操作包括：快速关闭窗口、切换桌面、快速打开百度、快速打开计算器，记事本等操作
 
 
 
-![](C:\Users\Administrator\Documents\GitHub\OfficeTools\img\操作演示.gif)
+![](<https://raw.githubusercontent.com/a1174236686/OfficeTools/master/img/OprationShow.gif>)
 
 
 
